@@ -31,11 +31,6 @@ Download and run the installation script for best results:
 
 ```r
 # Download and run the installation script
-source("https://raw.githubusercontent.com/tza5051/AHBPCE_Package/main/install_ahbpcepredr.R")
-```
-
-### Method 2: Manual Installation
-```r
 # Install required packages first
 if (!requireNamespace("devtools", quietly = TRUE)) {
   install.packages("devtools")
@@ -43,12 +38,13 @@ if (!requireNamespace("devtools", quietly = TRUE)) {
 
 # Install from GitHub
 devtools::install_github("tza5051/AHBPCE_Package", upgrade = "never")
+```
 
 # Load the package
 library(AHBPCEPredR)
 ```
 
-### Method 3: Local Installation
+### Method 2: Local Installation
 If you have the package file:
 ```r
 # Install from local tar.gz file
@@ -89,14 +85,6 @@ help(package = "AHBPCEPredR")
 
 # List all available functions
 ls("package:AHBPCEPredR")
-```
-
-### Quality Control Functions
-- Various QC functions for data validation and clinical decision support
-
-# Calculate O2 pulse for a female patient
-o2_pulse <- compute_o2_pulse(age = 45, sex = "Female")
-print(paste("Predicted O2 Pulse:", round(o2_pulse, 1), "ml/beat"))
 ```
 
 ## Function Reference
@@ -148,7 +136,7 @@ This package is developed for clinical use in pulmonary function laboratories. P
 ## Authors
 
 - **Tom Alexander** - *Lead Developer* - thomas.alexander3@va.gov
-- **Shobhik Rajaram** - *Developer*
+- **Shobhik** - *Developer*
 
 ## Support
 
