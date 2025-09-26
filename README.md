@@ -26,15 +26,33 @@ AHBPCEPredR is a comprehensive R package designed for cardiopulmonary exercise t
 
 ## Installation
 
-You can install the development version of AHBPCEPredR from GitHub:
+### Method 1: Easy Installation (Recommended)
+Download and run the installation script for best results:
 
 ```r
-# Install from GitHub
-# install.packages("devtools")
-devtools::install_github("tza5051/AHBPCE_Package")
+# Download and run the installation script
+source("https://raw.githubusercontent.com/tza5051/AHBPCE_Package/main/install_ahbpcepredr.R")
+```
 
-# Or install locally if you have the package files:
-devtools::install()
+### Method 2: Manual Installation
+```r
+# Install required packages first
+if (!requireNamespace("devtools", quietly = TRUE)) {
+  install.packages("devtools")
+}
+
+# Install from GitHub
+devtools::install_github("tza5051/AHBPCE_Package", upgrade = "never")
+
+# Load the package
+library(AHBPCEPredR)
+```
+
+### Method 3: Local Installation
+If you have the package file:
+```r
+# Install from local tar.gz file
+install.packages("AHBPCEPredR_0.1.0.tar.gz", repos = NULL, type = "source")
 ```
 
 ## Quick Start
@@ -43,18 +61,38 @@ devtools::install()
 library(AHBPCEPredR)
 
 # Calculate FRIEND VO2 prediction for a 45-year-old male
-vo2_pred <- compute_friend_vo2(
-  age = 45, 
-  sex = "Male", 
-  weight = 80,     # kg
-  height = 180,    # cm
-  mode = "Treadmill"
-)
-print(paste("Predicted VO2:", round(vo2_pred, 1), "ml/kg/min"))
+## Function Reference
 
-# Calculate maximum heart rate
-max_hr <- compute_max_hr(age = 45)
-print(paste("Predicted Max HR:", round(max_hr), "bpm"))
+### CPET Functions
+- `compute_friend_vo2()`: FRIEND VO2 prediction equation
+- `compute_max_hr()`: Age-predicted maximum heart rate
+- `compute_o2_pulse()`: Predicted O2 pulse calculation
+- `compute_peak_ve()`: Predicted peak ventilation
+- `compute_mvv()`: Maximum voluntary ventilation from FEV1
+- `compute_ventilatory_reserve()`: Ventilatory reserve calculation
+
+## Getting Help
+
+After installation, you can access help documentation:
+
+```r
+# Package overview
+help(package = "AHBPCEPredR")
+
+# Function-specific help
+?compute_friend_vo2
+?compute_max_hr
+?compute_o2_pulse
+?compute_peak_ve
+?compute_mvv
+?compute_ventilatory_reserve
+
+# List all available functions
+ls("package:AHBPCEPredR")
+```
+
+### Quality Control Functions
+- Various QC functions for data validation and clinical decision support
 
 # Calculate O2 pulse for a female patient
 o2_pulse <- compute_o2_pulse(age = 45, sex = "Female")
@@ -63,9 +101,20 @@ print(paste("Predicted O2 Pulse:", round(o2_pulse, 1), "ml/beat"))
 
 ## Function Reference
 
-### CPET Functions
-- `compute_friend_vo2()`: FRIEND VO2 prediction equation
-- `compute_max_hr()`: Age-predicted maximum heart rate
+## Support
+
+For questions about clinical applications or bug reports, please open an issue on GitHub at https://github.com/tza5051/AHBPCE_Package/issues.
+
+## Troubleshooting
+
+**Problem**: "No package index found" error when using `help(package = "AHBPCEPredR")`
+
+**Solution**: Use the installation script (Method 1) or try:
+```r
+# Rebuild help indices manually
+.rs.restartR()  # Restart R session
+library(AHBPCEPredR)
+```
 - `compute_o2_pulse()`: Predicted O2 pulse calculation
 - `compute_peak_ve()`: Predicted peak ventilation
 - `compute_mvv()`: Maximum voluntary ventilation from FEV1
