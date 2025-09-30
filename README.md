@@ -42,6 +42,14 @@ AHBPCEPredR is a comprehensive R package designed for cardiopulmonary exercise t
 - **VC**: Vital Capacity
 - **Complete Statistical Analysis**: LLN, ULN, z-scores, and percent predicted for all parameters
 
+#### Diffusing Capacity (DLCO)
+- **GLI 2017 DLCO Equations**: Transfer factor reference equations
+- **DLCO (TLCO)**: Diffusing capacity of the lung for carbon monoxide
+- **KCO**: Transfer coefficient (DLCO/VA ratio)
+- **VA**: Alveolar volume from single-breath test
+- **Miller Correction**: Hemoglobin adjustment for DLCO
+- **Complete Statistical Analysis**: LLN, ULN, z-scores, and percent predicted for all parameters
+
 ### Quality Control Functions
 - Standardized QC checks for pulmonary function testing
 - Data validation and error detection
@@ -148,6 +156,31 @@ rvtlc_pred <- compute_gli_lv_pred(sex = "Female", ht = 165, age = 55, param = "R
 print(rvtlc_pred)
 ```
 
+#### DLCO (Diffusing Capacity)
+```r
+# Calculate predicted DLCO for a 45-year-old male, 175 cm tall
+dlco_pred <- compute_gli_dlco_pred(sex = "Male", ht = 175, age = 45, param = "DLCO")
+print(dlco_pred)
+
+# Calculate lower limit of normal for KCO
+kco_lln <- compute_gli_dlco_lln(sex = "Female", ht = 165, age = 55, param = "KCO")
+print(kco_lln)
+
+# Calculate z-score for a measured DLCO of 8.5 mmol/min/kPa
+dlco_zscore <- compute_gli_dlco_zscore(sex = "Male", ht = 175, age = 45, 
+                                       measured = 8.5, param = "DLCO")
+print(dlco_zscore)
+
+# Calculate percent predicted for measured VA
+va_percent <- compute_gli_dlco_percent_pred(sex = "Female", ht = 165, age = 55,
+                                            measured = 5.2, param = "VA")
+print(va_percent)
+
+# Apply Miller correction for hemoglobin (Hgb = 11.0 g/dL)
+dlco_corrected <- compute_miller_correction(sex = "Male", hgb = 11.0, measured = 8.5)
+print(dlco_corrected)
+```
+
 ## Function Reference
 
 ### CPET Functions
@@ -173,6 +206,14 @@ print(rvtlc_pred)
 - `compute_gli_lv_uln()`: Calculate upper limit of normal (95th percentile) for lung volumes
 - `compute_gli_lv_zscore()`: Calculate z-score for measured lung volumes
 - `compute_gli_lv_percent_pred()`: Calculate percent predicted for lung volumes
+
+#### DLCO Functions
+- `compute_gli_dlco_pred()`: Calculate predicted values for DLCO, KCO, or VA
+- `compute_gli_dlco_lln()`: Calculate lower limit of normal (5th percentile) for DLCO
+- `compute_gli_dlco_uln()`: Calculate upper limit of normal (95th percentile) for DLCO
+- `compute_gli_dlco_zscore()`: Calculate z-score for measured DLCO values
+- `compute_gli_dlco_percent_pred()`: Calculate percent predicted for DLCO
+- `compute_miller_correction()`: Apply hemoglobin correction to DLCO
 
 ### Quality Control Functions
 - Various QC functions for data validation and clinical decision support
@@ -207,6 +248,14 @@ help(package = "AHBPCEPredR")
 ?compute_gli_lv_zscore
 ?compute_gli_lv_percent_pred
 
+# Function-specific help - GLI DLCO
+?compute_gli_dlco_pred
+?compute_gli_dlco_lln
+?compute_gli_dlco_uln
+?compute_gli_dlco_zscore
+?compute_gli_dlco_percent_pred
+?compute_miller_correction
+
 # List all available functions
 ls("package:AHBPCEPredR")
 ```
@@ -235,6 +284,18 @@ ls("package:AHBPCEPredR")
 - **IC** (Inspiratory Capacity): Maximum air that can be inspired from FRC
 - **VC** (Vital Capacity): Maximum air that can be expired after maximal inspiration
 
+### DLCO Parameters
+- **DLCO (TLCO)**: Transfer factor of the lung for carbon monoxide - measures gas exchange across alveolar-capillary membrane
+- **KCO**: Transfer coefficient (DLCO/VA) - DLCO corrected for alveolar volume
+- **VA**: Alveolar volume measured during single-breath DLCO test
+- **Miller Correction**: Adjusts DLCO for abnormal hemoglobin levels (anemia or polycythemia)
+
+**DLCO Impairment Causes:**
+- **Reduced DLCO**: Emphysema, interstitial lung disease, pulmonary vascular disease, anemia
+- **Elevated DLCO**: Polycythemia, alveolar hemorrhage, asthma (sometimes)
+- **Reduced VA**: Restrictive lung disease, poor test technique
+- **KCO helps differentiate**: Normal/high KCO with low DLCO suggests restriction; low KCO suggests true diffusion impairment
+
 ## Clinical References
 
 The equations implemented in this package are based on peer-reviewed clinical literature:
@@ -257,6 +318,10 @@ The equations implemented in this package are based on peer-reviewed clinical li
 
 - **GLI 2021 Lung Volume Equations.** Global Lung Function Initiative reference equations for lung volumes. [Supplementary material]
 
+- **Stanojevic S, et al.** GLI-2017 ERS/ATS standards for single-breath carbon monoxide uptake in the lung. *Eur Respir J.* 2017;50(3):1700010.
+
+- **Miller A, et al.** Effect of anemia on pulmonary diffusing capacity. *Am Rev Respir Dis.* 1980;121:441-445. [Miller Correction]
+
 ## Support
 
 For questions about clinical applications or bug reports, please open an issue on GitHub at https://github.com/tza5051/AHBPCE_Package/issues.
@@ -272,6 +337,7 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 
 ## Version History
 
+- **v0.4.0** - Added GLI 2017 DLCO equations (DLCO, KCO, VA) and Miller hemoglobin correction
 - **v0.3.0** - Added GLI 2021 lung volume equations (FRC, TLC, RV, RV/TLC, ERV, IC, VC)
 - **v0.2.0** - Added GLI 2021 Global spirometry equations (FEV1, FVC, FEV1/FVC)
 - **v0.1.0** - Initial release with CPET calculations

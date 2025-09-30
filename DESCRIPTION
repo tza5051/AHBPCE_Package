@@ -1,7 +1,7 @@
 Package: AHBPCEPredR
 Type: Package
 Title: AHB Pulmonary Clinical Exercise Predictions in R
-Version: 0.3.0
+Version: 0.4.0
 Authors@R: c(
     person("Tom", "Alexander", email = "thomas.alexander3@va.gov", role = c("aut", "cre")),
     person("Shobhik", "Chakraborty", email = "shobhik.chakraborty@va.gov", role = "aut")
@@ -12,11 +12,13 @@ Description: A comprehensive collection of functions for cardiopulmonary exercis
     FRIEND VO2 predictions (Silva et al. 2020), ventilatory calculations, maximum heart rate 
     predictions (Arena et al. 2016), O2 pulse calculations (Ross et al. 2020), GLI 2021 
     Global (race-neutral) spirometry reference equations (Bowerman et al. 2023) for FEV1, FVC, 
-    and FEV1/FVC ratio, and GLI 2021 lung volume equations for FRC, TLC, RV, RV/TLC, ERV, IC, 
-    and VC with predicted values, lower/upper limits of normal, z-scores, and percent predicted 
-    calculations. Includes quality control functions for clinical exercise testing and pulmonary 
-    function testing. Designed for use by pulmonary function laboratories and exercise physiology 
-    clinics to ensure consistent and accurate calculations in clinical practice.
+    and FEV1/FVC ratio, GLI 2021 lung volume equations for FRC, TLC, RV, RV/TLC, ERV, IC, 
+    and VC, and GLI 2017 DLCO equations for DLCO (TLCO), KCO, and VA with predicted values, 
+    lower/upper limits of normal, z-scores, and percent predicted calculations. Includes Miller 
+    correction for hemoglobin adjustment of DLCO. Includes quality control functions for clinical 
+    exercise testing and pulmonary function testing. Designed for use by pulmonary function 
+    laboratories and exercise physiology clinics to ensure consistent and accurate calculations 
+    in clinical practice.
 URL: https://github.com/tza5051/AHBPCE_Package
 BugReports: https://github.com/tza5051/AHBPCE_Package/issues
 License: MIT + file LICENSE
@@ -35,4 +37,3 @@ Suggests:
 VignetteBuilder: knitr
 Config/build/clean-inst-doc: FALSE
 Config/build/bootstrap: TRUE
-
