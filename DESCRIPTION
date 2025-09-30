@@ -1,36 +1,38 @@
 Package: AHBPCEPredR
 Type: Package
-Title: Cardiopulmonary Exercise Testing and Pulmonary Function Predictions
-Version: 0.2.0
+Title: AHB Pulmonary Clinical Exercise Predictions in R
+Version: 0.3.0
 Authors@R: c(
-    person("Tom", "Alexander", email = "thomas.alexander3@va.gov", 
-           role = c("aut", "cre")),
-    person("Shobhik", "Chakraborty", role = "aut"))
-Description: Comprehensive clinical prediction equations for cardiopulmonary 
-    exercise testing (CPET) and pulmonary function testing (PFT). Implements 
-    FRIEND VO2 predictions (Silva et al. 2020), maximum heart rate (Arena et al. 
-    2016), O2 pulse calculations (Ross et al. 2020), peak ventilation (Kaminsky 
-    et al. 2018), and maximum voluntary ventilation (ATS 2003). Includes GLI 2021 
-    Global (race-neutral) spirometry reference equations (Bowerman et al. 2023) 
-    for FEV1, FVC, and FEV1/FVC ratio with predicted values, lower/upper limits 
-    of normal, z-scores, and percent predicted calculations. Designed for use in 
-    pulmonary function laboratories and exercise physiology clinics.
+    person("Tom", "Alexander", email = "thomas.alexander3@va.gov", role = c("aut", "cre")),
+    person("Shobhik", "Chakraborty", email = "shobhik.chakraborty@va.gov", role = "aut")
+    )
+Description: A comprehensive collection of functions for cardiopulmonary exercise testing (CPET) 
+    calculations and pulmonary function predictions used in clinical practice. This package 
+    provides standardized implementations of widely-used prediction equations including:
+    FRIEND VO2 predictions (Silva et al. 2020), ventilatory calculations, maximum heart rate 
+    predictions (Arena et al. 2016), O2 pulse calculations (Ross et al. 2020), GLI 2021 
+    Global (race-neutral) spirometry reference equations (Bowerman et al. 2023) for FEV1, FVC, 
+    and FEV1/FVC ratio, and GLI 2021 lung volume equations for FRC, TLC, RV, RV/TLC, ERV, IC, 
+    and VC with predicted values, lower/upper limits of normal, z-scores, and percent predicted 
+    calculations. Includes quality control functions for clinical exercise testing and pulmonary 
+    function testing. Designed for use by pulmonary function laboratories and exercise physiology 
+    clinics to ensure consistent and accurate calculations in clinical practice.
 URL: https://github.com/tza5051/AHBPCE_Package
 BugReports: https://github.com/tza5051/AHBPCE_Package/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
 RoxygenNote: 7.3.2
-LazyData: true
 Depends: 
     R (>= 3.5.0)
 Imports:
     dplyr,
     stringr,
     readxl
-Suggests:
+Suggests: 
     testthat (>= 3.0.0),
     knitr,
     rmarkdown
 VignetteBuilder: knitr
 Config/build/clean-inst-doc: FALSE
 Config/build/bootstrap: TRUE
+
