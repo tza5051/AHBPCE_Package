@@ -12,9 +12,17 @@ read_excel_allsheets <- function(filename, tibble = FALSE) {
   x
 }
 
+# Find the Excel file (handles different naming)
+excel_files <- list.files("data-raw", pattern = "gli_global_lookuptables.*\\.xlsx$", full.names = TRUE)
+if(length(excel_files) == 0) {
+  stop("Excel file not found in data-raw folder")
+}
+excel_path <- excel_files[1]
+
+cat("Reading Excel file:", excel_path, "\n")
+
 # Read the lookup tables
-# Make sure gli_global_lookuptables_dec6.xlsx is in the data-raw folder
-SplineSheets <- read_excel_allsheets("data-raw/gli_global_lookuptables_dec6.xlsx")
+SplineSheets <- read_excel_allsheets(excel_path)
 
 # Save as internal package data
 # This makes it available to package functions but not to users
