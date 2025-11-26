@@ -50,6 +50,18 @@ AHBPCEPredR is a comprehensive R package designed for cardiopulmonary exercise t
 - **Miller Correction**: Hemoglobin adjustment for DLCO
 - **Complete Statistical Analysis**: LLN, ULN, z-scores, and percent predicted for all parameters
 
+#### FOT: Oostveen
+- **Both Resistance (r) and Reactance (x)**: Oostveen 2013
+- **R Predictions**: Predicted resistance
+- **X Predictions**: Predicted reactance
+- **Lower Limit of Normal (LLN)**: 5th percentile reference values
+- **Upper Limit of Normal (ULN)**: 95th percentile reference values
+- **Z-Score Calculations**: Standardized deviation from predicted values
+- **Percent Predicted**: Based on measured value
+
+
+
+
 ### Quality Control Functions
 - Standardized QC checks for pulmonary function testing
 - Data validation and error detection
@@ -181,6 +193,49 @@ dlco_corrected <- compute_miller_correction(sex = "Male", hgb = 11.0, measured =
 print(dlco_corrected)
 ```
 
+#### FOT (Oostveen)
+```r
+# Basic resistance prediction at 5 Hz
+r5_pred <- compute_oostveen_r_pred(
+  sex = "Male",
+  ht = 180,
+  age = 50,
+  weight = 80,
+  frequency = "5"
+)
+print(r5_pred)  # ~0.3 hPa·s·L⁻¹
+
+# Using different units
+r5_pred_in <- compute_oostveen_r_pred(
+  sex = "Male",
+  ht = 70,
+  ht_unit = "in",
+  age = 50,
+  weight = 176,
+  weight_unit = "lbs",
+  pressure_unit = "cmh2o",
+  frequency = "5"
+)
+
+# Lower limit of normal
+r5_lln <- compute_oostveen_r_lln(
+  sex = "Male",
+  ht = 180,
+  age = 50,
+  weight = 80,
+  frequency = "5"
+)
+
+# Check if measured value is elevated
+measured_r5 <- 0.45
+is_elevated <- measured_r5 > compute_oostveen_r_uln(
+  sex = "Male",
+  ht = 180,
+  age = 50,
+  weight = 80,
+  frequency = "5"
+)
+```
 ## Function Reference
 
 ### CPET Functions
@@ -256,45 +311,23 @@ help(package = "AHBPCEPredR")
 ?compute_gli_dlco_percent_pred
 ?compute_miller_correction
 
+# Function-specific help - FOT - Oostveen
+?compute_oostveen_r_pred
+?compute_oostveen_r_lln
+?compute_oostveen_r_uln
+?compute_oostveen_r_zscore
+?compute_oostveen_r_percent_pred
+?compute_oostveen_x_pred
+?compute_oostveen_x_lln
+?compute_oostveen_x_uln
+?compute_oostveen_x_zscore
+?compute_oostveen_x_percent_pred
+
+
 # List all available functions
 ls("package:AHBPCEPredR")
 ```
 
-## Clinical Interpretation
-
-### GLI 2021 Z-Scores
-- **Z-score < -1.645**: Below lower limit of normal (LLN) - may indicate impairment
-- **Z-score between -1.645 and +1.645**: Within normal range
-- **Z-score > +1.645**: Above upper limit of normal (ULN)
-
-### Percent Predicted Guidelines
-- **≥80%**: Generally considered normal (but use LLN for definitive interpretation)
-- **70-79%**: Mild impairment
-- **60-69%**: Moderate impairment
-- **<60%**: Severe impairment
-
-**Note**: Z-scores and LLN/ULN provide more accurate clinical interpretation than percent predicted alone.
-
-### Lung Volume Parameters
-- **FRC** (Functional Residual Capacity): Volume of air in lungs at end of normal expiration
-- **TLC** (Total Lung Capacity): Maximum volume of air lungs can hold
-- **RV** (Residual Volume): Volume remaining after maximal expiration
-- **RV/TLC**: Ratio for assessing air trapping (elevated in obstructive disease)
-- **ERV** (Expiratory Reserve Volume): Additional air that can be expired after normal expiration
-- **IC** (Inspiratory Capacity): Maximum air that can be inspired from FRC
-- **VC** (Vital Capacity): Maximum air that can be expired after maximal inspiration
-
-### DLCO Parameters
-- **DLCO (TLCO)**: Transfer factor of the lung for carbon monoxide - measures gas exchange across alveolar-capillary membrane
-- **KCO**: Transfer coefficient (DLCO/VA) - DLCO corrected for alveolar volume
-- **VA**: Alveolar volume measured during single-breath DLCO test
-- **Miller Correction**: Adjusts DLCO for abnormal hemoglobin levels (anemia or polycythemia)
-
-**DLCO Impairment Causes:**
-- **Reduced DLCO**: Emphysema, interstitial lung disease, pulmonary vascular disease, anemia
-- **Elevated DLCO**: Polycythemia, alveolar hemorrhage, asthma (sometimes)
-- **Reduced VA**: Restrictive lung disease, poor test technique
-- **KCO helps differentiate**: Normal/high KCO with low DLCO suggests restriction; low KCO suggests true diffusion impairment
 
 ## Clinical References
 
@@ -321,6 +354,11 @@ The equations implemented in this package are based on peer-reviewed clinical li
 - **Stanojevic S, et al.** GLI-2017 ERS/ATS standards for single-breath carbon monoxide uptake in the lung. *Eur Respir J.* 2017;50(3):1700010.
 
 - **Miller A, et al.** Effect of anemia on pulmonary diffusing capacity. *Am Rev Respir Dis.* 1980;121:441-445. [Miller Correction]
+
+### FOT References
+- **Oostveen E, et al.** Oostveen E, MacLeod D, González H, et al. The forced oscillation technique in clinical practice: methodology, recommendations and future developments.
+                        Eur Respir J. 2013;42(6):1513-1523. doi:10.1183/09031936.00105712
+
 
 ## Support
 

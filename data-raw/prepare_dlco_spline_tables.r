@@ -39,8 +39,8 @@ if (file.exists("R/sysdata.rda")) {
 
 # Save all datasets as internal package data
 # This makes them available to package functions but not to users
-usethis::use_data(SplineSheets, SplineSheetsLV, SplineSheetsDLCO,
-                  internal = TRUE, overwrite = TRUE)
+# usethis::use_data(SplineSheets, SplineSheetsLV, SplineSheetsDLCO,
+#                   internal = TRUE, overwrite = TRUE)
 
 cat("GLI DLCO spline lookup tables prepared successfully!\n")
 cat("Spirometry, lung volume, and DLCO data are now available internally.\n")

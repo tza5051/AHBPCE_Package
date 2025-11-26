@@ -8,4 +8,4 @@ library(usethis)
 gli_splines <- readxl::read_excel("data-raw/gli_global_lookuptables_dec6 2.xlsx")
 
 # Save as internal package data
-usethis::use_data(gli_splines, internal = TRUE, overwrite = TRUE)
+# usethis::use_data(gli_splines, internal = TRUE, overwrite = TRUE)

@@ -26,7 +26,7 @@ SplineSheets <- read_excel_allsheets(excel_path)
 
 # Save as internal package data
 # This makes it available to package functions but not to users
-usethis::use_data(SplineSheets, internal = TRUE, overwrite = TRUE)
+# usethis::use_data(SplineSheets, internal = TRUE, overwrite = TRUE)
 
 # Alternative: If you want users to access the data
 # usethis::use_data(SplineSheets, overwrite = TRUE)
