@@ -8,6 +8,8 @@ suppressPackageStartupMessages({
   library(readxl)
 })
 
+library(devtools)
+library(usethis)
 cat("=== AHBPCEPredR: Preparing internal data (GLI + FOT) ===\n\n")
 
 ## 1. Build / load GLI spline lookup tables ---------------------------
@@ -99,3 +101,9 @@ usethis::use_data(
 
 cat("  ✓ Internal data saved to R/sysdata.rda\n\n")
 cat("=== Done: GLI + FOT internal data prepared ===\n")
+
+# Generate documentation
+document()
+
+# Load the package
+load_all()
