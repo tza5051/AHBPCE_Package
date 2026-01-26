@@ -4,7 +4,7 @@
 cat("Installing AHBPCEPredR package from GitHub...\n")
 
 # Check if required packages are installed
-required_packages <- c("devtools", "roxygen2")
+required_packages <- c("remotes")
 missing_packages <- required_packages[!sapply(required_packages, requireNamespace, quietly = TRUE)]
 
 if (length(missing_packages) > 0) {
@@ -12,12 +12,12 @@ if (length(missing_packages) > 0) {
   install.packages(missing_packages)
 }
 
-# Load devtools
-library(devtools)
+# Load remotes
+library(remotes)
 
 # Install the package from GitHub with documentation build
 cat("Installing from GitHub...\n")
-devtools::install_github(
+remotes::install_github(
   "tza5051/AHBPCE_Package", 
   force = TRUE,
   build_vignettes = FALSE,
@@ -49,3 +49,9 @@ cat("  help(package = 'AHBPCEPredR')\n")
 
 cat("\n=== Package Successfully Installed! ===\n")
 cat("Your AHBPCEPredR package is ready to use.\n")
+
+cat("\n=== Updating the Package ===\n")
+cat("To update AHBPCEPredR to the latest version, run:\n\n")
+cat("  remotes::install_github('tza5051/AHBPCE_Package', force = TRUE)\n\n")
+cat("Or simply re-run this installation script.\n")
+cat("The 'force = TRUE' option ensures you get the latest version even if already installed.\n")
