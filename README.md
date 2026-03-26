@@ -379,12 +379,6 @@ Percent predicted for reactance.
 - **Predictors**: Age, height, weight/BMI
 - **Complete Statistical Analysis**: LLN, ULN, z-scores, and percent predicted
 
-### Quality Control Functions
-- Standardized QC checks for pulmonary function testing
-- Data validation and error detection
-- Clinical decision support tools
-
-
 ### Technical Implementation Details
 
 **Coefficient Storage**:
